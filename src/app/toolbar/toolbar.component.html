@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light p-3 bg-white border-bottom shadow-sm">
+  <a class="navbar-brand" href="#">Job Portal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="collapse()" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" [ngClass]="{'show': collapsed}" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-link" [ngClass]="{'active': active == ''}"  [routerLink]="['']">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-link" *ngIf="isRecruiter()" [routerLink] = "['dashboard']">Dashboard</a>
+      <a class="nav-link" [ngClass]="{'active': active == 'jobs'}" [routerLink]="['jobs']">Jobs</a>
+      <a class="nav-link" *ngIf="checkLogin()" [ngClass]="{'active': active == 'login'}"  [routerLink] = "['login']">Login</a>
+      <a class="nav-link" *ngIf="checkLogin()" [ngClass]="{'active': active == 'register'}" [routerLink] = "['register']">Register</a>
+      <a class="nav-link btn btn-outline-warning" *ngIf="!checkLogin()"  (click)="openModal(template)">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Do you want to confirm?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+  </div>
+</ng-template>
